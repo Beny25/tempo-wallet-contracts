@@ -1,66 +1,119 @@
-## Foundry
+# Tempo Mini Wallet – Contracts
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+Smart contract base for a Tempo-powered wallet, built using **Tempo Foundry fork**.
 
-Foundry consists of:
+This repository contains the on-chain logic that will be consumed by a MiniApp frontend.  
+The design follows a **clean separation** between contracts and UI.
 
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+---
 
-## Documentation
+## ✨ Overview
 
-https://book.getfoundry.sh/
+- Deployed on **Tempo Testnet**
+- Owner-based wallet pattern
+- Deployer ≠ Owner (best practice)
+- Built with Foundry (Tempo fork)
+- Ready to be integrated with a MiniApp frontend
 
-## Usage
+---
+
+## 🧱 Architecture
+
+**Pattern used**
+- `BaseOwner` contract
+- Single owner set at deployment
+- Future-proof for controller / wallet execution logic
+
+**Why this matters**
+- Safer deployments
+- Clear ownership
+- Easier frontend integration
+- Upgrade path remains open
+
+---
+
+## 📦 Tech Stack
+
+- Solidity `0.8.30`
+- Foundry (Tempo fork)
+- Forge / Cast
+- Tempo Testnet
+
+---
+
+## 🚀 Deployment Info
+
+- **Network:** Tempo Testnet  
+- **Chain ID:** `42429`  
+- **Contract Address:**  
+```
+
+0x669E987880d694E975198555331025944f438aCD
+
+````
+
+The contract is verified and publicly readable on Tempo explorer.
+
+---
+
+## 🔍 Example: Read Owner
+
+```bash
+cast call <CONTRACT_ADDRESS> \
+"owner()(address)" \
+--rpc-url https://rpc.testnet.tempo.xyz
+````
+
+---
+
+## 🧪 Development
+
+### Install Tempo Foundry
+
+```bash
+foundryup -n tempo
+```
 
 ### Build
 
-```shell
-$ forge build
+```bash
+forge build
 ```
 
 ### Test
 
-```shell
-$ forge test
+```bash
+forge test
 ```
 
-### Format
+### Deploy (example)
 
-```shell
-$ forge fmt
+```bash
+forge script script/Deploy.s.sol \
+  --rpc-url $TEMPO_RPC_URL \
+  --broadcast \
+  --verify
 ```
 
-### Gas Snapshots
+---
 
-```shell
-$ forge snapshot
-```
+## 🧭 Roadmap
 
-### Anvil
+* [x] Base owner contract
+* [x] Verified deployment
+* [ ] Wallet controller logic
+* [ ] MiniApp execution support
+* [ ] Upgradeability (optional)
 
-```shell
-$ anvil
-```
+---
 
-### Deploy
+## 🧠 Notes
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
+This repository intentionally **does not include frontend code**.
+The MiniApp UI lives in a separate repo to keep concerns isolated.
 
-### Cast
+---
 
-```shell
-$ cast <subcommand>
-```
+## 📄 License
 
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+MIT
