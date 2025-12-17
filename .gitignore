@@ -1,0 +1,7 @@
+.env
+.env.local
+broadcast/
+cache/
+out/
+node_modules/
+
